@@ -1,0 +1,57 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://apis.google.com/js/api.js"></script>
+</head>
+<body>
+    <h1>Hello World! </h1>
+
+    <script>
+        function handleClientLoad() {
+          gapi.load('client:auth2', initClient);
+        }
+      
+        function initClient() {
+          gapi.client.init({
+            apiKey: 'AIzaSyDx1wC5K01wb-erqJoN8fyLzTwlvwFURhc',
+            clientId: '389558876747-7tfbp69bnbspc4f1otvfskg8u2ubj5o6.apps.googleusercontent.com',
+            discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
+            scope: 'https://www.googleapis.com/auth/spreadsheets.readonly',
+          }).then(function() {
+            gapi.auth2.getAuthInstance().signIn();
+          });
+        }
+      </script>
+      <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
+      
+
+      <script>
+        function getDataFromGoogleSheets() {
+          gapi.client.sheets.spreadsheets.values.get({
+            spreadsheetId: '1uAE2GT3GnWL0DJEzl54fYlMDGePNvs44rVOT5bspvfg',
+            range: 'Sheet1!A1:D10' // Replace with your sheet name and range
+          }).then(function(response) {
+            var range = response.result;
+            var values = range.values;
+            
+            // Process the data (e.g., display it on your website)
+            console.log(values);
+          }, function(reason) {
+            console.error('Error: ' + reason.result.error.message);
+          });
+        }
+      </script>
+
+<script>
+    // Call the function when the page has finished loading
+    window.addEventListener('load', getDataFromGoogleSheets);
+  </script>
+  
+      
+      
+    
+    
+</body>
+</html>
